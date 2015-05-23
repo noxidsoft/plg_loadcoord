@@ -1,47 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="2.5" type="plugin" group="content">
+<extension version="3.0" type="plugin" group="content">
 	<name>Content - Load Coord</name>
 	<author>Noxidsoft</author>
-	<creationDate>March 2012</creationDate>
-	<copyright>Copyright (C) 2007 - 2012 Noxidsoft. All rights reserved.</copyright>
-	<license>http://www.gnu.org/licenseses/gpl-2.0.html GNU/GPL</license>
+	<creationDate>September 2014</creationDate>
+	<copyright>Copyright (C) 2007 - 2014 Noxidsoft. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later</license>
 	<authorEmail>admin@noxidsoft.com</authorEmail>
 	<authorUrl>www.noxidsoft.com</authorUrl>
-	<version>2.5.3.8</version>
+	<version>3.3.4</version>
 	<description>PLG_LOADCOORD_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="loadcoord">loadcoord.php</filename>
-		<filename>index.html</filename>
 		<folder>images</folder>
-		<folder>language</folder>
+    <folder>language</folder>
+    <filename>index.html</filename>
 	</files>
-	
+
 	<config>
 		<fields name="params">
 
 			<fieldset name="basic">
-				<field 
-					name="mapMode" 
-					type="list"
-					default="0"
-					label="PLG_MAPMODE_LABEL"
-					description="PLG_MAPMODE_DESC">
-					<option value="0">PLG_MAPMODE_ONE</option>
-					<option value="1">PLG_MAPMODE_TWO</option>
+
+				<field name="mapMode" type="list" default="0" label="PLG_LOADCOORD_MAPMODE_LABEL" description="PLG_LOADCOORD_MAPMODE_DESC">
+					<option value="0">PLG_LOADCOORD_MAPMODE_ONE</option>
+					<option value="1">PLG_LOADCOORD_MAPMODE_TWO</option>
 				</field>
-				<field 
-					name="mapZoom" 
-					type="list"
-					default="16"
-					label="PLG_MAPZOOM_LABEL"
-					description="PLG_MAPZOOM_DESC">
+
+				<field name="mapZoom" type="list" default="16" label="PLG_LOADCOORD_MAPZOOM_LABEL" description="PLG_LOADCOORD_MAPZOOM_DESC">
 					<option value="6">6</option>
 					<option value="8">8</option>
 					<option value="10">10</option>
 					<option value="12">12</option>
 					<option value="14">14</option>
 					<option value="15">15</option>
-					<option selected="selected" value="16">16</option>
+					<option value="16">16</option>
 					<option value="18">18</option>
 					<option value="20">20</option>
 				</field>
@@ -49,4 +41,10 @@
 
 		</fields>
 	</config>
+
+	<!-- UPDATESERVER DEFINITION -->
+	<updateservers>
+	        <!-- Note: No spaces or linebreaks allowed between the server tags -->
+	        <server type="extension" priority="1" name="Loadcoord Update Site">http://www.noxidsoft.com/otherApps/jupdates/loadcoord-update.xml</server>
+	</updateservers>
 </extension>
