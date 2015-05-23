@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="content">
+	<name>Content - Load Coord</name>
+	<author>Noxidsoft</author>
+	<creationDate>March 2012</creationDate>
+	<copyright>Copyright (C) 2007 - 2012 Noxidsoft. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<authorEmail>admin@noxidsoft.com</authorEmail>
+	<authorUrl>www.noxidsoft.com</authorUrl>
+	<version>1.5.25.2</version>
+	<description>This content plugin adds several ways to link a Google map view to map coordinates within content. Don't forget to publish this plugin. Usage: {loadmap latitude, longitude}</description>
+	<files>
+		<filename plugin="loadcoord">loadcoord.php</filename>
+		<folder>loadcoord</folder>
+	</files>
+	
+	<params>
+		<param name="mapMode" type="list" default="0" label="Map mode" description="Choose the link map mode, that is, will the map open in a new or the parent window.">
+			<option value="0">Parent Window</option>
+			<option value="1">New Window</option>
+		</param>
+		<param name="mapZoom" type="list" default="16" label="Map zoom" description="A number that represents the zoom of map closeness.">
+			<option value="6">6</option>
+			<option value="8">8</option>
+			<option value="10">10</option>
+			<option value="12">12</option>
+			<option value="14">14</option>
+			<option value="15">15</option>
+			<option value="16">16</option>
+			<option value="18">18</option>
+			<option value="20">20</option>
+		</param>
+	</params>
+	
+</install>
