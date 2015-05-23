@@ -12,37 +12,44 @@
 // no direct access
 defined('_JEXEC') or die;
 
-$mainframe->registerEvent('onPrepareContent', 'plgContentLoadcoord');
-
-function plgContentLoadcoord(&$article, &$params, $page=0)
-{
-	// simple performance check to determine whether bot should process further
-	if (strpos($article->text, 'loadcoord') === false) {
-		return true;
-	}
+class plgContentLoadcoord extends JPlugin
+{	
+	public function onContentPrepare($context, &$article, &$params, $page = 0)
+	{
+		// Don't run this plugin when the content is being indexed
+		if ($context == 'com_finder.indexer') {
+			return true;
+		}
 		
-	$mapMode 		= $params->get('mapMode', 0);
-	$mapZoom 		= $params->get('mapZoom', 16);
-	
-	$regex		= '/{loadcoord\s+(.*?)}/i';
-	preg_match_all($regex, $article->text, $matches, PREG_SET_ORDER);
+		// simple performance check to determine whether bot should process further
+		if (strpos($article->text, 'loadcoord') === false) {
+			return true;
+		}
+		
+		$mapMode 		= $this->params->def('mapMode', 0);
+		$mapZoom 		= $this->params->def('mapZoom', 16);
+		
+		$regex		= '/{loadcoord\s+(.*?)}/i';
+		preg_match_all($regex, $article->text, $matches, PREG_SET_ORDER);
 
-	// No matches, skip this
-	if ($matches) {
-		foreach ($matches as $match) {
-			
-			// link parent window
-			if ($mapMode == 0) {
-				$output = '<a href="http://maps.google.com.au/maps?q='.strip_tags($match[1]).'&z='.$mapZoom.'"><img style="padding-left:5px;" src="plugins/content/loadcoord/images/map.gif" alt="Map" /></a>';
+		// No matches, skip this
+		if ($matches) {
+			foreach ($matches as $match) {
+				
+				// link parent window
+				if ($mapMode == 0) {
+					$output = '<a href="http://maps.google.com.au/maps?q='.strip_tags($match[1]).'&z='.$mapZoom.'"><img style="padding-left:5px;" src="plugins/content/loadcoord/images/map.gif" alt="Map" /></a>';
+				}
+				
+				// link new window
+				if ($mapMode == 1) {
+					$output = '<a href="http://maps.google.com.au/maps?q='.strip_tags($match[1]).'&z='.$mapZoom.'" target="_blank"><img style="padding-left:5px;" src="plugins/content/loadcoord/images/map.gif" alt="Map" /></a>';
+				}
+				
+				//echo $output;
+				$article->text = preg_replace("|$match[0]|", addcslashes($output, '\\'), $article->text, 1);
+				
 			}
-			
-			// link new window
-			if ($mapMode == 1) {
-				$output = '<a href="http://maps.google.com.au/maps?q='.strip_tags($match[1]).'&z='.$mapZoom.'" target="_blank"><img style="padding-left:5px;" src="plugins/content/loadcoord/images/map.gif" alt="Map" /></a>';
-			}
-			
-			$article->text = preg_replace("|$match[0]|", addcslashes($output, '\\'), $article->text, 1);
-			
 		}
 	}
 }
